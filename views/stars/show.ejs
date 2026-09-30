@@ -1,0 +1,40 @@
+<%- include('../partials/header', { title: star.name }) %>
+
+<div class="page-title">
+  <h1><%= star.name %></h1>
+  <div class="actions">
+    <a class="btn" href="/stars/<%= star.id %>/edit">Edit</a>
+    <form action="/stars/<%= star.id %>?_method=DELETE" method="POST"
+          onsubmit="return confirm('Delete this star?');">
+      <button type="submit" class="btn btn-danger">Delete</button>
+    </form>
+  </div>
+</div>
+
+<div class="card detail">
+  <% if (star.image) { %>
+    <img src="<%= star.image %>" alt="<%= star.name %>">
+  <% } %>
+  <p><strong>Size:</strong> <%= star.size %></p>
+  <p><strong>Description:</strong> <%= star.description %></p>
+  <p><strong>Galaxy:</strong>
+    <% if (star.Galaxy) { %>
+      <a href="/galaxies/<%= star.Galaxy.id %>"><%= star.Galaxy.name %></a>
+    <% } else { %> None <% } %>
+  </p>
+</div>
+
+<h2>Planets orbiting this star</h2>
+<% if (!star.Planets || star.Planets.length === 0) { %>
+  <p class="muted">No planets yet.</p>
+<% } else { %>
+  <ul class="list">
+    <% star.Planets.forEach(planet => { %>
+      <li><a href="/planets/<%= planet.id %>"><%= planet.name %></a></li>
+    <% }) %>
+  </ul>
+<% } %>
+
+<p><a href="/stars">&larr; Back to stars</a></p>
+
+<%- include('../partials/footer') %>

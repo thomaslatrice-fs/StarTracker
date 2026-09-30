@@ -1,0 +1,26 @@
+<%- include('../partials/header', { title: 'Planets' }) %>
+
+<div class="page-title">
+  <h1>Planets</h1>
+  <a class="btn" href="/planets/new">+ New Planet</a>
+</div>
+
+<% if (planets.length === 0) { %>
+  <p class="muted">No planets yet.</p>
+<% } %>
+
+<div class="grid">
+  <% planets.forEach(planet => { %>
+    <a class="card card-link" href="/planets/<%= planet.id %>">
+      <% if (planet.image) { %>
+        <img src="<%= planet.image %>" alt="<%= planet.name %>">
+      <% } else { %>
+        <div class="img-placeholder">No image</div>
+      <% } %>
+      <h2><%= planet.name %></h2>
+      <p class="muted">Size: <%= planet.size %></p>
+    </a>
+  <% }) %>
+</div>
+
+<%- include('../partials/footer') %>

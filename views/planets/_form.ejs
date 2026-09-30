@@ -1,0 +1,42 @@
+<% if (error) { %>
+  <p class="error"><%= error %></p>
+<% } %>
+
+<form class="card form" action="<%= action %>" method="POST" enctype="multipart/form-data">
+  <label>Name
+    <input type="text" name="name" value="<%= planet.name || '' %>" required>
+  </label>
+
+  <label>Size
+    <input type="number" name="size" value="<%= planet.size || '' %>" required>
+  </label>
+
+  <label>Description
+    <textarea name="description" rows="5"><%= planet.description || '' %></textarea>
+  </label>
+
+  <fieldset class="checkbox-group">
+    <legend>Stars</legend>
+    <% stars.forEach(star => { %>
+      <label class="checkbox">
+        <input type="checkbox" name="starIds" value="<%= star.id %>"
+          <%= selectedStarIds.map(String).includes(String(star.id)) ? 'checked' : '' %>>
+        <%= star.name %>
+      </label>
+    <% }) %>
+  </fieldset>
+
+  <label>Image
+    <input type="file" name="image" accept="image/*">
+  </label>
+
+  <% if (planet.image) { %>
+    <p class="muted">Current image (upload a new one to replace it):</p>
+    <img class="thumb" src="<%= planet.image %>" alt="Current image">
+  <% } %>
+
+  <div class="actions">
+    <button type="submit" class="btn"><%= submitLabel %></button>
+    <a class="btn btn-secondary" href="/planets">Cancel</a>
+  </div>
+</form>

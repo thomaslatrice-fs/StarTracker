@@ -1,0 +1,35 @@
+<%- include('../partials/header', { title: planet.name }) %>
+
+<div class="page-title">
+  <h1><%= planet.name %></h1>
+  <div class="actions">
+    <a class="btn" href="/planets/<%= planet.id %>/edit">Edit</a>
+    <form action="/planets/<%= planet.id %>?_method=DELETE" method="POST"
+          onsubmit="return confirm('Delete this planet?');">
+      <button type="submit" class="btn btn-danger">Delete</button>
+    </form>
+  </div>
+</div>
+
+<div class="card detail">
+  <% if (planet.image) { %>
+    <img src="<%= planet.image %>" alt="<%= planet.name %>">
+  <% } %>
+  <p><strong>Size:</strong> <%= planet.size %></p>
+  <p><strong>Description:</strong> <%= planet.description %></p>
+</div>
+
+<h2>Stars this planet orbits</h2>
+<% if (!planet.Stars || planet.Stars.length === 0) { %>
+  <p class="muted">Not orbiting any stars yet.</p>
+<% } else { %>
+  <ul class="list">
+    <% planet.Stars.forEach(star => { %>
+      <li><a href="/stars/<%= star.id %>"><%= star.name %></a></li>
+    <% }) %>
+  </ul>
+<% } %>
+
+<p><a href="/planets">&larr; Back to planets</a></p>
+
+<%- include('../partials/footer') %>

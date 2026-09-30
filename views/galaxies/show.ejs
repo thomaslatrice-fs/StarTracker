@@ -1,0 +1,35 @@
+<%- include('../partials/header', { title: galaxy.name }) %>
+
+<div class="page-title">
+  <h1><%= galaxy.name %></h1>
+  <div class="actions">
+    <a class="btn" href="/galaxies/<%= galaxy.id %>/edit">Edit</a>
+    <form action="/galaxies/<%= galaxy.id %>?_method=DELETE" method="POST"
+          onsubmit="return confirm('Delete this galaxy?');">
+      <button type="submit" class="btn btn-danger">Delete</button>
+    </form>
+  </div>
+</div>
+
+<div class="card detail">
+  <% if (galaxy.image) { %>
+    <img src="<%= galaxy.image %>" alt="<%= galaxy.name %>">
+  <% } %>
+  <p><strong>Size:</strong> <%= galaxy.size %></p>
+  <p><strong>Description:</strong> <%= galaxy.description %></p>
+</div>
+
+<h2>Stars in this galaxy</h2>
+<% if (!galaxy.Stars || galaxy.Stars.length === 0) { %>
+  <p class="muted">No stars yet.</p>
+<% } else { %>
+  <ul class="list">
+    <% galaxy.Stars.forEach(star => { %>
+      <li><a href="/stars/<%= star.id %>"><%= star.name %></a></li>
+    <% }) %>
+  </ul>
+<% } %>
+
+<p><a href="/galaxies">&larr; Back to galaxies</a></p>
+
+<%- include('../partials/footer') %>

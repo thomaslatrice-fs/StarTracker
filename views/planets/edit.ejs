@@ -1,0 +1,4 @@
+<%- include('../partials/header', { title: 'Edit Planet' }) %>
+<h1>Edit <%= planet.name %></h1>
+<%- include('_form', { action: '/planets/' + planet.id + '?_method=PUT', submitLabel: 'Save Changes' }) %>
+<%- include('../partials/footer') %>

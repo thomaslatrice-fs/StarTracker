@@ -1,0 +1,26 @@
+<%- include('../partials/header', { title: 'Stars' }) %>
+
+<div class="page-title">
+  <h1>Stars</h1>
+  <a class="btn" href="/stars/new">+ New Star</a>
+</div>
+
+<% if (stars.length === 0) { %>
+  <p class="muted">No stars yet.</p>
+<% } %>
+
+<div class="grid">
+  <% stars.forEach(star => { %>
+    <a class="card card-link" href="/stars/<%= star.id %>">
+      <% if (star.image) { %>
+        <img src="<%= star.image %>" alt="<%= star.name %>">
+      <% } else { %>
+        <div class="img-placeholder">No image</div>
+      <% } %>
+      <h2><%= star.name %></h2>
+      <p class="muted">Galaxy: <%= star.Galaxy ? star.Galaxy.name : 'None' %></p>
+    </a>
+  <% }) %>
+</div>
+
+<%- include('../partials/footer') %>

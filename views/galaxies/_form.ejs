@@ -1,0 +1,31 @@
+<% if (error) { %>
+  <p class="error"><%= error %></p>
+<% } %>
+
+<form class="card form" action="<%= action %>" method="POST" enctype="multipart/form-data">
+  <label>Name
+    <input type="text" name="name" value="<%= galaxy.name || '' %>" required>
+  </label>
+
+  <label>Size
+    <input type="number" name="size" value="<%= galaxy.size || '' %>" required>
+  </label>
+
+  <label>Description
+    <textarea name="description" rows="5"><%= galaxy.description || '' %></textarea>
+  </label>
+
+  <label>Image
+    <input type="file" name="image" accept="image/*">
+  </label>
+
+  <% if (galaxy.image) { %>
+    <p class="muted">Current image (upload a new one to replace it):</p>
+    <img class="thumb" src="<%= galaxy.image %>" alt="Current image">
+  <% } %>
+
+  <div class="actions">
+    <button type="submit" class="btn"><%= submitLabel %></button>
+    <a class="btn btn-secondary" href="/galaxies">Cancel</a>
+  </div>
+</form>

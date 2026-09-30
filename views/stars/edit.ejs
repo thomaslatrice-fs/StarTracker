@@ -1,0 +1,4 @@
+<%- include('../partials/header', { title: 'Edit Star' }) %>
+<h1>Edit <%= star.name %></h1>
+<%- include('_form', { action: '/stars/' + star.id + '?_method=PUT', submitLabel: 'Save Changes' }) %>
+<%- include('../partials/footer') %>

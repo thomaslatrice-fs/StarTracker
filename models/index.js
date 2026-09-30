@@ -11,6 +11,7 @@ const fields = () => ({
   name: { type: DataTypes.STRING, allowNull: false },
   size: { type: DataTypes.INTEGER, allowNull: false },
   description: { type: DataTypes.TEXT },
+  image: { type: DataTypes.STRING, allowNull: true }, // NEW
 });
 
 const Galaxy = sequelize.define("Galaxy", fields());

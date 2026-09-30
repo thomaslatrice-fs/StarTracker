@@ -1,0 +1,42 @@
+<% if (error) { %>
+  <p class="error"><%= error %></p>
+<% } %>
+
+<form class="card form" action="<%= action %>" method="POST" enctype="multipart/form-data">
+  <label>Name
+    <input type="text" name="name" value="<%= star.name || '' %>" required>
+  </label>
+
+  <label>Size
+    <input type="number" name="size" value="<%= star.size || '' %>" required>
+  </label>
+
+  <label>Description
+    <textarea name="description" rows="5"><%= star.description || '' %></textarea>
+  </label>
+
+  <label>Galaxy
+    <select name="galaxyId" required>
+      <option value="">Select a galaxy</option>
+      <% galaxies.forEach(galaxy => { %>
+        <option value="<%= galaxy.id %>" <%= String(star.galaxyId) === String(galaxy.id) ? 'selected' : '' %>>
+          <%= galaxy.name %>
+        </option>
+      <% }) %>
+    </select>
+  </label>
+
+  <label>Image
+    <input type="file" name="image" accept="image/*">
+  </label>
+
+  <% if (star.image) { %>
+    <p class="muted">Current image (upload a new one to replace it):</p>
+    <img class="thumb" src="<%= star.image %>" alt="Current image">
+  <% } %>
+
+  <div class="actions">
+    <button type="submit" class="btn"><%= submitLabel %></button>
+    <a class="btn btn-secondary" href="/stars">Cancel</a>
+  </div>
+</form>
